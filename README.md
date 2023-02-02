@@ -1,2 +1,3 @@
 # terraform-aws-xksproxy
-Deploy an EC2 Instance as XKSPROXY for Vault and AWS KMS
+No-Code Module to Deploy an EC2 Instance as XKSPROXY for Vault and AWS KMS
+
