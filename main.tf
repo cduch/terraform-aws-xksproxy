@@ -129,3 +129,12 @@ resource "aws_security_group_rule" "https" {
   protocol          = "tcp"
   cidr_blocks       = [var.whitelist_ip]
 }
+
+resource "aws_security_group_rule" "egress" {
+  security_group_id = aws_security_group.xks-secgroup.id
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
