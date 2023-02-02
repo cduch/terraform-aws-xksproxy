@@ -24,7 +24,7 @@ provider "aws" {
 resource "aws_instance" "app_server" {
   ami           = var.ami
   instance_type = var.instance_type
-  subnet_id = aws_subnet.xks_subnet
+  subnet_id = aws_subnet.xks_subnet.id
   associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.xks_secgroup.id]
   key_name = var.key_name
@@ -97,14 +97,14 @@ resource "aws_subnet" "xks_subnet" {
 **************************************/
 
 
-resource "aws_security_group" "xks_secgroup" {
+resource "aws_security_group" "xks-secgroup" {
   name        = "${var.name}-primary-sg"
   description = "Primary ASG"
   vpc_id      = aws_vpc.xks_vpc.id
 }
 
 resource "aws_security_group_rule" "ssh" {
-  security_group_id = aws_security_group.xks_secgroup.id
+  security_group_id = aws_security_group.xks-secgroup.id
   type              = "ingress"
   from_port         = 22
   to_port           = 22
@@ -113,7 +113,7 @@ resource "aws_security_group_rule" "ssh" {
 }
 
 resource "aws_security_group_rule" "http" {
-  security_group_id = aws_security_group.xks_secgroup.id
+  security_group_id = aws_security_group.xks-secgroup.id
   type              = "ingress"
   from_port         = 8000
   to_port           = 8000
@@ -122,7 +122,7 @@ resource "aws_security_group_rule" "http" {
 }
 
 resource "aws_security_group_rule" "https" {
-  security_group_id = aws_security_group.xks_secgroup.id
+  security_group_id = aws_security_group.xks-secgroup.id
   type              = "ingress"
   from_port         = 443
   to_port           = 443
