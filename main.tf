@@ -130,6 +130,16 @@ resource "aws_security_group_rule" "https" {
   cidr_blocks       = [var.whitelist_ip]
 }
 
+resource "aws_security_group_rule" "kmip" {
+  security_group_id = aws_security_group.xks-secgroup.id
+  type              = "ingress"
+  from_port         = 5696
+  to_port           = 5696
+  protocol          = "tcp"
+  cidr_blocks       = [var.whitelist_ip]
+}
+
+
 resource "aws_security_group_rule" "egress" {
   security_group_id = aws_security_group.xks-secgroup.id
   type              = "egress"
