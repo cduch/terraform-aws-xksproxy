@@ -26,7 +26,7 @@ resource "aws_instance" "app_server" {
   instance_type = var.instance_type
   subnet_id = aws_subnet.xks_subnet.id
   associate_public_ip_address = "true"
-  vpc_security_group_ids = [aws_security_group.xks_secgroup.id]
+  vpc_security_group_ids = [aws_security_group.xks-secgroup.id]
   key_name = var.key_name
   tags = {
     Name = "${var.name}-instance"
